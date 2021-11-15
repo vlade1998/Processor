@@ -13,9 +13,14 @@ module Memoria_de_dados
 	
 	// Declare the RAM variable
 	reg [DATA_WIDTH-1:0] ram[200:0];
+	integer pClock = 1;
 	
 	always @ (posedge write_clock)
 	begin
+		if(pClock) begin
+			ram[1] = {6'b011001,5'b00001,21'b000000000000000000000};
+			pClock = 0;
+		end
 		// Write
 		if (we)
 			ram[write_addr] <= data;

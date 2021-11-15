@@ -1,6 +1,6 @@
-module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,AluOP,Branch,Beq_Bne,PcSrc,J_Jr,LessImediate,ReadM,WriteM,ReadI,WriteO,MemToReg,Halt);
+module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,AluOP,Branch,Beq_Bne,PcSrc,J_Jr,LessImediate,ReadM,WriteM,ReadI,WriteO,MemToReg,Halt,WriteI);
 	input[5:0] opcode;
-	output reg RegDst,RegDstJal,WriteR,AluSrc,WriteLH,LO_HI,Branch,Beq_Bne,PcSrc,J_Jr,LessImediate,ReadM,WriteM,ReadI,WriteO,MemToReg,Halt;
+	output reg RegDst,RegDstJal,WriteR,AluSrc,WriteLH,LO_HI,Branch,Beq_Bne,PcSrc,J_Jr,LessImediate,ReadM,WriteM,ReadI,WriteO,MemToReg,Halt,WriteI;
 	output reg[3:0] AluOP;
 	output reg[2:0] WriteSrc;
 	always @(opcode) 
@@ -24,6 +24,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b000001: //addi
 				begin
@@ -44,6 +45,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b000010: //sub
 				begin
@@ -64,6 +66,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b000011: //mult
 				begin
@@ -84,6 +87,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b000100: //div
 				begin
@@ -104,6 +108,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b000101: //and
 				begin
@@ -124,6 +129,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b000110: //or
 				begin
@@ -144,6 +150,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b000111: //xor
 				begin
@@ -163,6 +170,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteM = 0;
 					WriteO = 0;
 					MemToReg = 0;
+					WriteI = 0;
 				end
 			6'b001000: //not
 				begin
@@ -182,6 +190,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteM = 0;
 					WriteO = 0;
 					MemToReg = 0;
+					WriteI = 0;
 				end
 			6'b001001: //sr
 				begin
@@ -202,6 +211,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b001010: //sl
 				begin
@@ -222,6 +232,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b001011: //move
 				begin
@@ -242,6 +253,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b001100: //mLO
 				begin
@@ -262,6 +274,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b001101: //mHI
 				begin
@@ -282,6 +295,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b001110: //load
 				begin
@@ -302,6 +316,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 1;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b001111: //loadi
 				begin
@@ -322,6 +337,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b010000: //store
 				begin
@@ -342,6 +358,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b010001: //beq
 				begin
@@ -362,6 +379,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b010010: //bne
 				begin
@@ -382,6 +400,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b010011: //slt
 				begin
@@ -402,6 +421,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b010100: //slti
 				begin
@@ -422,6 +442,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b010101: //jump
 				begin
@@ -442,6 +463,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b010110: //jumpr
 				begin
@@ -462,6 +484,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b010111: //jal
 				begin
@@ -482,6 +505,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b011000: //in
 				begin
@@ -502,6 +526,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 1;
+					WriteI = 0;
 				end
 			6'b011001: //out
 				begin
@@ -522,6 +547,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 1;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 			6'b011011: //halt
 				begin
@@ -542,6 +568,28 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 1;
+					WriteI = 0;
+				end
+			6'b011100: //writei
+				begin
+					RegDst = 0;
+					RegDstJal = 0;
+					WriteSrc = 0;
+					WriteR = 0;
+					AluSrc = 0;
+					WriteLH = 0;
+					LO_HI = 0;
+					AluOP = 0000;
+					Branch = 0;
+					Beq_Bne = 0;
+					PcSrc = 1;
+					J_Jr = 0;
+					LessImediate = 0; 
+					WriteM = 0;
+					WriteO = 0;
+					MemToReg = 0;
+					Halt = 0;
+					WriteI = 1;
 				end
 			default: //nop
 				begin
@@ -562,6 +610,7 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					WriteO = 0;
 					MemToReg = 0;
 					Halt = 0;
+					WriteI = 0;
 				end
 		endcase
 endmodule

@@ -33,7 +33,7 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debugPC,clo
 	wire out_beq_bne;
 	wire outCont;
 	wire outReset;
-	wire RegDst, RegDstJal, WriteR, AluSrc, WriteLH, LO_HI, Branch, Beq_Bne, PcSrc, J_Jr, LessImediate, WriteM, ReadI, WriteO, MemToReg, Halt; //controle
+	wire RegDst, RegDstJal, WriteR, AluSrc, WriteLH, LO_HI, Branch, Beq_Bne, PcSrc, J_Jr, LessImediate, WriteM, ReadI, WriteO, MemToReg, Halt, WriteI; //controle
 	wire[3:0] AluOP; //controle
 	wire[2:0] WriteSrc; //controle 
 	input[17:0] in;
@@ -100,7 +100,8 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debugPC,clo
 		.ReadI(ReadI),
 		.WriteO(WriteO),
 		.MemToReg(MemToReg),
-		.Halt(Halt)
+		.Halt(Halt),
+		.WriteI(WriteI)
 		);
 		
 	muxDoisPad muxBeq_Bne(
@@ -112,7 +113,10 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debugPC,clo
 				
 	Memoria_de_instrucoes instmem(
 		.read_addr(EnderecoInstrucao),
+		.write_addr(ResULA),
+		.data(ReadA),
 		.q(Instrucao),
+		.we(WriteI),
 		.write_clock(clock),
 		.read_clock(clockR)
 		);
