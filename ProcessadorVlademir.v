@@ -235,7 +235,7 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debugPC,clo
 		.in5({14'd0,in}), //ReadIO
 		.in6(outLessImediate), 
 		.in7(EnderecoInstrucao + 1), 
-		.in8(32'd0), 
+		.in8(EnderecoInstrucao), 
 		.select(WriteSrc), 
 		.out(outWriteSrc) 
 	);

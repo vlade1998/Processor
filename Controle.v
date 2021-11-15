@@ -591,6 +591,27 @@ module Controle(opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,Alu
 					Halt = 0;
 					WriteI = 1;
 				end
+			6'b011101: //writePC 
+				begin
+					RegDst = 0;
+					RegDstJal = 0;
+					WriteSrc = 111;
+					WriteR = 1;
+					AluSrc = 0;
+					WriteLH = 0;
+					LO_HI = 0;
+					AluOP = 0;
+					Branch = 0;
+					Beq_Bne = 0;
+					PcSrc = 1;
+					J_Jr = 0;
+					LessImediate = 0; 
+					WriteM = 0;
+					WriteO = 0;
+					MemToReg = 0;
+					Halt = 0;
+					WriteI = 0;
+				end
 			default: //nop
 				begin
 					RegDst = 0;
