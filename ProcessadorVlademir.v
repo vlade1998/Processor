@@ -1,4 +1,4 @@
-module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debugPC,clockL); //remover fio de debug no final
+module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debug2,debugPC,clockL); //remover fio de debug no final
 	input clockR;
 	input cont;
 	input reset;
@@ -40,7 +40,8 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debugPC,clo
 	output wire[31:0] out1;
 	output wire[31:0] out2;
 	output wire[31:0] out3;
-	output wire[31:0] debug; //remover no final, ajuste a vontade o tamanho dessa porra
+	output wire[31:0] debug; 
+	output wire[31:0] debug2; 
 	output wire[31:0] debugPC; //remover no final
 	output clockL; //remover no final
 	
@@ -51,6 +52,13 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debugPC,clo
 	Clock_divider divisorClock(
 		.clock_in(clockR),
 		.clock_out(clock)
+	);
+
+	Clock_interruption_module clock_interruption_module(
+		.clock(clock),
+		.reset(0),
+		.stop(0),
+		.sigint(debug2)
 	);
 	
 	PC pc(
