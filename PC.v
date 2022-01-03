@@ -1,8 +1,8 @@
-module PC(halt,clock,endereco,branch,pcsrc,j_jr,endBranch,endJump,endJumpR,zeroULA,reset);
+module PC(halt,clock,endereco,branch,pcsrc,j_jr,endBranch,endJump,endJumpR,zeroULA,reset,intSig);
 	input[31:0] endJumpR;
 	input[15:0] endBranch;
 	input[25:0] endJump;
-	input halt, clock, branch, pcsrc, j_jr,zeroULA,reset;
+	input halt, clock, branch, pcsrc, j_jr,zeroULA,reset, intSig;
 	
 	output wire[31:0] endereco;
 	
@@ -10,10 +10,13 @@ module PC(halt,clock,endereco,branch,pcsrc,j_jr,endBranch,endJump,endJumpR,zeroU
 	
 	assign endereco = enderecoReg;
 	always @(posedge clock) begin
-		if(reset) enderecoReg = 0;
-		if(~halt) enderecoReg = enderecoReg + 1;
-		if(branch && zeroULA && pcsrc) enderecoReg = enderecoReg + endBranch;
-		if(j_jr && ~pcsrc) enderecoReg = {enderecoReg[31:26],endJump};
-		if(~j_jr && ~pcsrc) enderecoReg = endJumpR;
+		if(intSig) enderecoReg = 31'd16;
+		else begin
+			if(reset) enderecoReg = 0;
+			if(~halt) enderecoReg = enderecoReg + 1;
+			if(branch && zeroULA && pcsrc) enderecoReg = enderecoReg + endBranch;
+			if(j_jr && ~pcsrc) enderecoReg = {enderecoReg[31:26],endJump};
+			if(~j_jr && ~pcsrc) enderecoReg = endJumpR;
+		end
 	end
 endmodule

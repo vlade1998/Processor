@@ -33,6 +33,8 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debug2,debu
 	wire out_beq_bne;
 	wire outCont;
 	wire outReset;
+	wire intSig;
+	wire stopQnt;
 	wire RegDst, RegDstJal, WriteR, AluSrc, WriteLH, LO_HI, Branch, Beq_Bne, PcSrc, J_Jr, LessImediate, WriteM, ReadI, WriteO, MemToReg, Halt, WriteI; //controle
 	wire[3:0] AluOP; //controle
 	wire[2:0] WriteSrc; //controle 
@@ -57,8 +59,8 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debug2,debu
 	Clock_interruption_module clock_interruption_module(
 		.clock(clock),
 		.reset(0),
-		.stop(0),
-		.sigint(debug2)
+		.stop(stopQnt),
+		.sigint(intSig)
 	);
 	
 	PC pc(
@@ -72,7 +74,8 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debug2,debu
 		.endJump(Instrucao[25:0]),
 		.endJumpR(ReadA),
 		.zeroULA(out_beq_bne),
-		.reset(outReset)
+		.reset(outReset),
+		.intSig(intSig)
 		);
 		
 	monostable tratamentoCont(
@@ -109,7 +112,9 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debug2,debu
 		.WriteO(WriteO),
 		.MemToReg(MemToReg),
 		.Halt(Halt),
-		.WriteI(WriteI)
+		.WriteI(WriteI),
+		.intSig(intSig),
+		.stopQnt(stopQnt)
 		);
 		
 	muxDoisPad muxBeq_Bne(
@@ -136,9 +141,11 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debug2,debu
 		.out(outRegDst)
 		);
 	
-	muxDois5B muxRegDstJal(
+	muxQuatro5B muxRegDstJal(
 		.in1(outRegDst),
 		.in2(5'd31),
+		.in3(5'd27),
+		.in4(5'd0),
 		.select(RegDstJal),
 		.out(outRegDstJal)
 		);

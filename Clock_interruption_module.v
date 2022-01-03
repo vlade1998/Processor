@@ -1,5 +1,5 @@
 module Clock_interruption_module
-#(parameter quantum=100)
+#(parameter quantum=10)
 (
 	input clock,
 	input reset,
