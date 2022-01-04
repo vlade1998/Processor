@@ -1,5 +1,5 @@
 module Clock_interruption_module
-#(parameter quantum=10)
+#(parameter quantum=5000)
 (
 	input clock,
 	input reset,
@@ -10,7 +10,7 @@ module Clock_interruption_module
 	reg[7:0] counter = 8'd0;
 	reg off = 1'b0;
 	
-	always @ (negedge clock) 
+	always @ (posedge clock) 
 	begin
 		if(stop) begin
 			off = 1;

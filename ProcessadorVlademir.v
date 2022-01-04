@@ -35,9 +35,10 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debug2,debu
 	wire outReset;
 	wire intSig;
 	wire stopQnt;
-	wire RegDst, RegDstJal, WriteR, AluSrc, WriteLH, LO_HI, Branch, Beq_Bne, PcSrc, J_Jr, LessImediate, WriteM, ReadI, WriteO, MemToReg, Halt, WriteI; //controle
+	wire RegDst, WriteR, AluSrc, WriteLH, LO_HI, Branch, Beq_Bne, PcSrc, J_Jr, LessImediate, WriteM, ReadI, WriteO, MemToReg, Halt, WriteI; //controle
 	wire[3:0] AluOP; //controle
 	wire[2:0] WriteSrc; //controle 
+	wire[1:0] RegDstJal;
 	input[17:0] in;
 	output wire[31:0] out1;
 	output wire[31:0] out2;
@@ -49,6 +50,7 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debug2,debu
 	
 	
 	assign debugPC = EnderecoInstrucao;
+	assign debug2 = RegDstJal;
 	assign clockL = clock;
 	
 	Clock_divider divisorClock(

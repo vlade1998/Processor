@@ -1,9 +1,10 @@
 module Controle(intSig,opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO_HI,AluOP,Branch,Beq_Bne,PcSrc,J_Jr,LessImediate,ReadM,WriteM,ReadI,WriteO,MemToReg,Halt,WriteI,stopQnt);
 	input[5:0] opcode;
 	input intSig;
-	output reg RegDst,RegDstJal,WriteR,AluSrc,WriteLH,LO_HI,Branch,Beq_Bne,PcSrc,J_Jr,LessImediate,ReadM,WriteM,ReadI,WriteO,MemToReg,Halt,WriteI,stopQnt;
+	output reg RegDst,WriteR,AluSrc,WriteLH,LO_HI,Branch,Beq_Bne,PcSrc,J_Jr,LessImediate,ReadM,WriteM,ReadI,WriteO,MemToReg,Halt,WriteI,stopQnt;
 	output reg[3:0] AluOP;
 	output reg[2:0] WriteSrc;
+	output reg[1:0] RegDstJal;
 	always @(opcode)
 		if(intSig) begin
 			RegDst = 0;

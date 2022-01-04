@@ -8,7 +8,7 @@ module Banco_de_registradores(ra,rb,rc,write,readA,readB,clock,writeReg, debug);
 	
 	assign readA = registradores[ra];
 	assign readB = registradores[rb];
-	assign debug = registradores[rb];
+	assign debug = rc;
 	
 	
 	always@(negedge clock) begin
