@@ -35,6 +35,7 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debug2,debu
 	wire outReset;
 	wire intSig;
 	wire stopQnt;
+	wire rstQnt;
 	wire RegDst, WriteR, AluSrc, WriteLH, LO_HI, Branch, Beq_Bne, PcSrc, J_Jr, LessImediate, WriteM, ReadI, WriteO, MemToReg, Halt, WriteI; //controle
 	wire[3:0] AluOP; //controle
 	wire[2:0] WriteSrc; //controle 
@@ -60,7 +61,7 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debug2,debu
 
 	Clock_interruption_module clock_interruption_module(
 		.clock(clock),
-		.reset(0),
+		.reset(rstQnt),
 		.stop(stopQnt),
 		.sigint(intSig)
 	);
@@ -116,7 +117,8 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debug2,debu
 		.Halt(Halt),
 		.WriteI(WriteI),
 		.intSig(intSig),
-		.stopQnt(stopQnt)
+		.stopQnt(stopQnt),
+		.rstQnt(rstQnt)
 		);
 		
 	muxDoisPad muxBeq_Bne(
