@@ -720,6 +720,29 @@ module Controle(intSig,opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO
 						stopQnt = 0;
 						rstQnt = 1;
 					end
+				6'b011111: //stpQnt
+					begin
+						RegDst = 0;
+						RegDstJal = 0;
+						WriteSrc = 0;
+						WriteR = 0;
+						AluSrc = 0;
+						WriteLH = 0;
+						LO_HI = 0;
+						AluOP = 0;
+						Branch = 0;
+						Beq_Bne = 0;
+						PcSrc = 1;
+						J_Jr = 0;
+						LessImediate = 0; 
+						WriteM = 0;
+						WriteO = 0;
+						MemToReg = 0;
+						Halt = 0;
+						WriteI = 0;
+						stopQnt = 1;
+						rstQnt = 0;
+					end
 				default: //nop
 					begin
 						RegDst = 0;
