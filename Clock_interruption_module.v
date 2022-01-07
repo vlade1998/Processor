@@ -1,5 +1,5 @@
 module Clock_interruption_module
-#(parameter quantum=5000)
+#(parameter quantum=5)
 (
 	input clock,
 	input reset,
@@ -24,8 +24,9 @@ module Clock_interruption_module
 		
 		if(!off) begin
 			counter = counter + 8'd1;
-			if(counter >= quantum) begin
+			if(counter >= quantum + 1) begin
 				sigint = 1;
+				counter = 0;
 			end
 			else begin
 				sigint = 0;

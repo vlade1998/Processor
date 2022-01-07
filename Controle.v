@@ -27,7 +27,7 @@ module Controle(intSig,opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO
 			WriteI = 0;
 			// IntAddr = clkIntAddr;
 			// sigInt = 1;
-			stopQnt = 1;
+			stopQnt = 0;
 			rstQnt = 0;
 		end
 		else begin 
