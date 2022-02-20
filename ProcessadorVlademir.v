@@ -51,7 +51,7 @@ module ProcessadorVlademir(clockR,cont,reset,in,out1,out2,out3,debug,debug2,debu
 	
 	
 	assign debugPC = EnderecoInstrucao;
-	assign debug2 = RegDstJal;
+	assign debug2 = Instrucao;
 	assign clockL = clock;
 	
 	Clock_divider divisorClock(

@@ -25,8 +25,6 @@ module Controle(intSig,opcode,RegDst,RegDstJal,WriteSrc,WriteR,AluSrc,WriteLH,LO
 			MemToReg = 0;
 			Halt = 0;
 			WriteI = 0;
-			// IntAddr = clkIntAddr;
-			// sigInt = 1;
 			stopQnt = 0;
 			rstQnt = 0;
 		end

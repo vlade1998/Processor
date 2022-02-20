@@ -10,7 +10,7 @@ module PC(halt,clock,endereco,branch,pcsrc,j_jr,endBranch,endJump,endJumpR,zeroU
 	
 	assign endereco = enderecoReg;
 	always @(posedge clock) begin
-		if(intSig) enderecoReg = 31'd16;
+		if(intSig) enderecoReg = 31'd213;
 		else begin
 			if(reset) enderecoReg = 0;
 			if(~halt) enderecoReg = enderecoReg + 1;

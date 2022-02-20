@@ -1,5 +1,5 @@
 module Clock_interruption_module
-#(parameter quantum=5)
+#(parameter quantum=20)
 (
 	input clock,
 	input reset,
@@ -7,8 +7,8 @@ module Clock_interruption_module
 	output reg sigint
 );
 
-	reg[7:0] counter = 8'd0;
-	reg off = 1'b0;
+	reg[31:0] counter = 32'd0;
+	reg off = 1'b1;
 	
 	always @ (posedge clock) 
 	begin
